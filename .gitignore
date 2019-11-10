@@ -1,2 +1,4 @@
 #node files
 /node_modules/ 
+
+JasmineTests/node_modules/
