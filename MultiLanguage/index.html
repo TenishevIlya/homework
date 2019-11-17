@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+	<title>Главная</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="node_modules/normalize.css">
+</head>
+<body class="all-body-content">
+	<nav>
+		<div class="header-nav">
+			<h2 class="logo">TestMe.ru</h2> 
+			<a href="#" class="nav-link">Мои тесты</a>
+			<a href="#" class="nav-link">Статистика</a>
+			<a href="#" class="nav-link">Настройки</a>
+			<button class="signin-btn">Войти</button> 	
+		</div>  	
+	</nav> 
+	<main class="main-content">
+		<div class="introduce-part">
+			<div class="form-part">
+				<form class="registration-form">
+					<h2 class="form-heading">Хотите получать рассылку о новых тестах? Зарегистрируйтесь</h2>
+				    <input type="text" name="" class="all-inputs" placeholder="Имя">
+				    <input type="email" name="" class="all-inputs" placeholder="Почта">
+				    <input type="password" name="" class="all-inputs" placeholder="Пароль">	
+				    <button type="submit" class="signup-btn">Зарегистрироваться</button>
+				</form>
+			</div>
+			<hr class="introduce-divider">
+			<div class="about-us">
+			    <h2 class="about-heading">Интересные тесты разных видов сложнестей и тематик</h2>
+			    <div class="test-buttons">
+			    	<div class="tabs">
+				    	<span class="tab-1 active-tab" id="first-tab">Первые</span>
+				    	<span class="tab-2" id="second-tab">Вторые</span>
+				    </div>	
+			   		<div class="first-spheres active-spheres" id="sphere_one">
+			   			<button class="sport-btn">Спорт</button>
+			   			<button class="science-btn">Наука</button>
+			   			<button class="cinema-btn">Кино</button>	
+			   		</div>
+			   		<div class="second-spheres hide-spheres" id="sphere_two">
+			   		    <button class="books-btn">Книги</button>
+			   		    <button class="programming-btn">Программирование</button>
+			   		    <button class="profession-btn">Профессия</button>	
+			   		</div>
+			    </div>
+			    <div class="trial-quiz">
+			    	<!-- <p> Попробуйте пройти наш пробный тест! </p>
+			    	<a href="questions.html" class="go-btn" id="trial-test-btn">
+			    		     		    	<i class="fas fa-arrow-right"></i>
+			    		     		    </a> -->
+			    	 <a href="questions.html">Попробуйте пройти наш пробный тест!</a> 
+			    	<!-- <a href="quiz_test_version.html">Попробуйте пройти наш пробный тест!</a> -->	     		    
+			    </div>	
+			</div>
+	    </div>
+	    <hr class="divide-line">
+	</main>
+	<footer class="footer">
+		<div class="footer-links">
+			<div class="short-info-about-us">
+				<h3>Кратко о нас</h3>	
+			</div>
+		    <div class="socials">
+		    	<h3>Мы в социальных сетях</h3>
+		    	<div class="footer-socials">
+			        <a href="#"><i class="fab fa-2x fa-twitter-square"></i></a>
+			        <a href="#"><i class="fab fa-2x fa-facebook-square"></i></a>
+			        <a href="#"><i class="fab fa-2x fa-vk"></i></a>
+			        <a href="#"><i class="fab fa-2x fa-telegram"></i></a>
+		        </div>	
+		    </div>
+		</div>    
+	</footer>
+
+	<script src="script/script.js"></script>
+</body>
+</html>

@@ -2,3 +2,7 @@
 /node_modules/ 
 
 JasmineTests/node_modules/
+
+MultiLanguage/node_modules/
+
+/.idea/
