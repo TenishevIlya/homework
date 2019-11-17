@@ -12,26 +12,18 @@ class Counter {
       			return "9+";
     		}
    			else {
-      			return "total is less than 1";
+      			return "";
     		}
   		}
   		if ((this.total === null) || (this.total === undefined)) {
     		return null;
   		}
 	}
-}
 
-class CounterResultsShow {
-	constructor(result) {
-		this.result = result;
-	}
-
-	show() {
-		console.log(this.result);
-	}
+  show() {
+    secondResult.append('Total: ' + this.counter());
+  }
 }
 
 let count = new Counter(10102);
-
-let res = new CounterResultsShow(count.counter());
-res.show();
+count.show();

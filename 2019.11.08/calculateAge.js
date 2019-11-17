@@ -13,21 +13,12 @@ class Calculation {
       		return null;  
     	}
 	}
-}
-
-
-class AgeShow {
-	constructor(age) {
-		this.age = age;
-	}
 
 	show() {
-		console.log(this.age);
+		firstResult.append('Age: ' + this.calculateAge());
 	}
 }
 
 let myCalculation = new Calculation(new Date(1999,8,22));
-
-let myAge = new AgeShow(myCalculation.calculateAge());
-myAge.show();
+myCalculation.show();
 
