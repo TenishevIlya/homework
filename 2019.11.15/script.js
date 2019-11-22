@@ -1,39 +1,27 @@
-let btn = document.getElementById('toggleBtn');
-let myPopup = document.getElementById('popUp');
+let btn = document.querySelector('.toggle');
+let myPopup = document.querySelector('.popup');
 let modalFlag = false;
 
-let getHorizontalShift = (element,popupEl) => {
+function getHorizontalShift(element,popupEl) {
 	return (popupEl.offsetWidth - element.offsetWidth)/2;
 }
 
-let getVerticalShift = (element,popupEl) => {
+function getVerticalShift(element,popupEl) {
 	return (popupEl.offsetHeight - element.offsetHeight)/2;	
 }
 
-let getWindowHeight = () => {
-    return window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
-}
-
-let getWindowWidth = () => {
-    return window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-}
-
-let getCoordinates = (element) => {
+function getCoordinates(element) {
 	let coords = [];
 	coords.push(element.getBoundingClientRect().top);
 	coords.push(element.getBoundingClientRect().left);
 	return coords;
 }
 
-let showPopup = (element) => {
+function showPopup(element) {
 	element.style.display = "block";	
 }
 
-let outputVerticalExtraCases = (element,popupEl,btnCoords) => {
+function outputVerticalExtraCases(element,popupEl,btnCoords) {
 	if (popupEl.getBoundingClientRect().left < 0) {
 		popupEl.style.left = btnCoords[1] + 'px';	
 	}
@@ -42,7 +30,7 @@ let outputVerticalExtraCases = (element,popupEl,btnCoords) => {
 	}	
 }
 
-let outputHorizontalExtraCases = (element,popupEl,btnCoords) => {
+function outputHorizontalExtraCases(element,popupEl) {
 	if (popupEl.getBoundingClientRect().bottom > getWindowHeight()) {
 		popupEl.style.top = getWindowHeight() - popupEl.offsetHeight - element.offsetHeight + 'px';
 	}
@@ -51,21 +39,21 @@ let outputHorizontalExtraCases = (element,popupEl,btnCoords) => {
 	}
 }
 
-let outputPopupDown = (element,popupEl,btnCoords) => {
+function outputPopupDown(element,popupEl,btnCoords) {
 	let shift = getHorizontalShift(element,popupEl);
 	popupEl.style.top = btnCoords[0] + element.offsetHeight + 10 +'px';
 	popupEl.style.left = btnCoords[1] - shift + 'px';
 	outputVerticalExtraCases(element,popupEl,btnCoords);
 }
 
-let outputPopupLeft = (element,popupEl,btnCoords) => {
+function outputPopupLeft(element,popupEl,btnCoords) {
 	let shift = getVerticalShift(element,popupEl);
 	popupEl.style.top = btnCoords[0] - shift +'px';
 	popupEl.style.left = btnCoords[1] - popupEl.offsetWidth - 10 +'px';
-	outputHorizontalExtraCases(element,popupEl,btnCoords);		
+	outputHorizontalExtraCases(element,popupEl);		
 }
 
-let outputPopupUp = (element,popupEl,btnCoords) => {
+function outputPopupUp(element,popupEl,btnCoords) {
 	let shift = getHorizontalShift(element,popupEl);
 	popupEl.style.top = btnCoords[0] - popupEl.offsetHeight - 10 +'px';
 	popupEl.style.left = btnCoords[1] - shift + 'px';
@@ -73,21 +61,21 @@ let outputPopupUp = (element,popupEl,btnCoords) => {
 }
 
 
-let outputPopupRight = (element,popupEl,btnCoords) => {
+function outputPopupRight(element,popupEl,btnCoords) {
 	let shift = getVerticalShift(element,popupEl);
 	popupEl.style.top = btnCoords[0] - shift +'px';
 	popupEl.style.left = btnCoords[1] + element.offsetWidth + 10 +'px';
-	outputHorizontalExtraCases(element,popupEl,btnCoords);
+	outputHorizontalExtraCases(element,popupEl);
 }
 
-let outputPopupAsModal = (popupEl) => {
+function outputPopupAsModal(popupEl) {
 	popupEl.classList.add("modal");
 	popupEl.style.height = popupEl.offsetHeight/2+'px';
 	popupEl.style.top = (getWindowHeight() - popupEl.offsetHeight) / 2 + 'px';
 	popupEl.style.left = (getWindowWidth() - popupEl.offsetWidth) / 2 + 'px';
 }
 
-let validateBottomOutput = (element,popupEl) => {
+function validateBottomOutput(element,popupEl) {
 	let elementTopLeftCoords = getCoordinates(element);
 	let shift = getHorizontalShift(element,popupEl);
 	if ((elementTopLeftCoords[0] + element.offsetHeight + 10 + popupEl.offsetHeight) < getWindowHeight()) {
@@ -95,7 +83,7 @@ let validateBottomOutput = (element,popupEl) => {
 	}
 }
 
-let validateLeftOutput = (element,popupEl) => {
+function validateLeftOutput(element,popupEl) {
 	let elementTopLeftCoords = getCoordinates(element);
 	let shift = getVerticalShift(element,popupEl);
 	if (validatePopupHeight(popupEl) && (((elementTopLeftCoords[1] - popupEl.offsetWidth - 10) < elementTopLeftCoords[1]) &&
@@ -104,7 +92,7 @@ let validateLeftOutput = (element,popupEl) => {
 	}	
 }
 
-let validateTopOutput = (element,popupEl) => {
+function validateTopOutput(element,popupEl) {
 	let elementTopLeftCoords = getCoordinates(element);
 	let shift = getHorizontalShift(element,popupEl);
 	if ((elementTopLeftCoords[0] - element.offsetHeight - 10 - popupEl.offsetHeight) > 0) {
@@ -112,7 +100,7 @@ let validateTopOutput = (element,popupEl) => {
 	}
 }
 
-let validateRightOutput = (element,popupEl) => {
+function validateRightOutput(element,popupEl) {
 	let elementTopLeftCoords = getCoordinates(element);
 	let shift = getHorizontalShift(element,popupEl);
 	if (validatePopupHeight(popupEl) && (((elementTopLeftCoords[1] + popupEl.offsetWidth + 10) > elementTopLeftCoords[1]) &&
@@ -121,15 +109,15 @@ let validateRightOutput = (element,popupEl) => {
 	}	
 }
 
-let validatePopupHeight = (element) => {
+function validatePopupHeight(element) {
 	return element.offsetHeight < getWindowHeight();
 }
 
-let validatePopupWidth = (element) => {
+function validatePopupWidth(element) {
 	return element.offsetWidth < getWindowWidth();
 }
 
-let groupFunctions = (...rest) => {
+function groupFunctions(...rest) {
 	let array = [];
 	for (let i = 0; i < rest.length; i++) {
 		array.push(rest[i]);
@@ -137,11 +125,11 @@ let groupFunctions = (...rest) => {
 	return array;
 }
 
-let hidePopup = () => {
+function hidePopup() {
 	popupArea.innerHTML = '';
 }
 
-let outputPopup = (element,popupEl) => {
+function outputPopup(element,popupEl) {
 	try {
 		showPopup(popupEl);
 		popupArea.append(popupEl);
@@ -191,3 +179,16 @@ document.addEventListener('click', ($event) => {
         hidePopup();
     }
 });
+
+
+function getWindowHeight() {
+    return window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+}
+
+function getWindowWidth() {
+    return window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+}
