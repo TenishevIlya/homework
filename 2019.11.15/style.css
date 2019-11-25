@@ -34,3 +34,10 @@
     overflow-y: scroll;
     z-index: 500; 
 }
+/* .popup::after {
+    content: ''; 
+    position: absolute; 
+    left: 20px; bottom: -20px;  
+    border: 10px solid transparent;  
+    border-top: 10px solid #abe2bd; 
+} */

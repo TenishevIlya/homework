@@ -2,6 +2,11 @@ let btn = document.querySelector('.toggle');
 let myPopup = document.querySelector('.popup');
 let modalFlag = false;
 
+function getPopupHeight(popupEl) {
+	const height = popupEl.offsetHeight/2;
+	return height;	
+}
+
 function getHorizontalShift(element,popupEl) {
 	return (popupEl.offsetWidth - element.offsetWidth)/2;
 }
@@ -26,7 +31,7 @@ function outputVerticalExtraCases(element,popupEl,btnCoords) {
 		popupEl.style.left = btnCoords[1] + 'px';	
 	}
 	if (popupEl.getBoundingClientRect().right > getWindowWidth()) {
-		popupEl.style.left = getWindowWidth() - popupEl.offsetWidth + 'px';	
+		popupEl.style.left = getWindowWidth() - (getWindowWidth() - element.getBoundingClientRect().right) - popupEl.offsetWidth + 'px';	
 	}	
 }
 
@@ -70,7 +75,7 @@ function outputPopupRight(element,popupEl,btnCoords) {
 
 function outputPopupAsModal(popupEl) {
 	popupEl.classList.add("modal");
-	popupEl.style.height = popupEl.offsetHeight/2+'px';
+	popupEl.style.height = getWindowHeight()/2+'px';
 	popupEl.style.top = (getWindowHeight() - popupEl.offsetHeight) / 2 + 'px';
 	popupEl.style.left = (getWindowWidth() - popupEl.offsetWidth) / 2 + 'px';
 }
@@ -131,6 +136,7 @@ function hidePopup() {
 
 function outputPopup(element,popupEl) {
 	try {
+		let countOutputs = 0;
 		showPopup(popupEl);
 		popupArea.append(popupEl);
 
@@ -143,20 +149,16 @@ function outputPopup(element,popupEl) {
 	
 		if ((validatePopupHeight(popupEl)) && (validatePopupWidth(popupEl))) {
 			for (let i = 0; i < validateFunctions.length; i++) {
-				if (modalFlag !== true){
-					if (validateFunctions[i](element,popupEl)){
-						outputFunctions[i](element,popupEl,elementTopLeftCoords);
-						modalFlag = true;
-						break;
-					}
+				if (validateFunctions[i](element,popupEl)){
+					countOutputs++;
+					outputFunctions[i](element,popupEl,elementTopLeftCoords);
+					break;
 				}
 			}
-			if (modalFlag === false){
-				modalFlag = true;
-				outputPopupAsModal(popupEl);
-			}
 		}
-
+		if (countOutputs == 0) {
+				outputPopupAsModal(popupEl);
+		}
 		if (!(validatePopupHeight(popupEl)) || !(validatePopupWidth(popupEl))){
 			throw new Error('Too big popup!');	
 		}
