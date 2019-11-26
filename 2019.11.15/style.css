@@ -33,6 +33,7 @@
 .modal {
     overflow-y: scroll;
     z-index: 500; 
+    top: 25%;
 }
 /* .popup::after {
     content: ''; 

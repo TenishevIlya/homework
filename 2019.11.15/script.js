@@ -2,10 +2,6 @@ let btn = document.querySelector('.toggle');
 let myPopup = document.querySelector('.popup');
 let modalFlag = false;
 
-function getPopupHeight(popupEl) {
-	const height = popupEl.offsetHeight/2;
-	return height;	
-}
 
 function getHorizontalShift(element,popupEl) {
 	return (popupEl.offsetWidth - element.offsetWidth)/2;
@@ -75,9 +71,8 @@ function outputPopupRight(element,popupEl,btnCoords) {
 
 function outputPopupAsModal(popupEl) {
 	popupEl.classList.add("modal");
-	popupEl.style.height = getWindowHeight()/2+'px';
-	popupEl.style.top = (getWindowHeight() - popupEl.offsetHeight) / 2 + 'px';
-	popupEl.style.left = (getWindowWidth() - popupEl.offsetWidth) / 2 + 'px';
+	popupEl.style.height = getWindowHeight()/2 + 'px';
+	popupEl.style.left = getWindowWidth() - (getWindowWidth()/2) - popupEl.offsetWidth/2 + 'px';
 }
 
 function validateBottomOutput(element,popupEl) {
@@ -148,21 +143,23 @@ function outputPopup(element,popupEl) {
 		let outputFunctions = groupFunctions(outputPopupDown,outputPopupLeft,outputPopupUp,outputPopupRight);
 	
 		if ((validatePopupHeight(popupEl)) && (validatePopupWidth(popupEl))) {
-			for (let i = 0; i < validateFunctions.length; i++) {
-				if (validateFunctions[i](element,popupEl)){
-					countOutputs++;
-					outputFunctions[i](element,popupEl,elementTopLeftCoords);
-					break;
+			if (modalFlag === false){
+				for (let i = 0; i < validateFunctions.length; i++) {
+					if (validateFunctions[i](element,popupEl)){
+						countOutputs++;
+						outputFunctions[i](element,popupEl,elementTopLeftCoords);
+						break;
+					}
 				}
 			}
 		}
 		if (countOutputs == 0) {
-				outputPopupAsModal(popupEl);
+			modalFlag = true;
+			outputPopupAsModal(popupEl);
 		}
 		if (!(validatePopupHeight(popupEl)) || !(validatePopupWidth(popupEl))){
 			throw new Error('Too big popup!');	
 		}
-
 	} catch(e) {
 		popupArea.remove(popupEl);
 	}
